@@ -23,6 +23,7 @@
 	$values_for_array = array_slice($available_values, 0, $rows * $cols);
 
 	$array = [];
+	$cols_summ = [];
 
 	for ($i = 0; $i < $rows; $i++){
 		$array[$i] = [];
@@ -30,9 +31,17 @@
 		for ($j = 0; $j < $cols; $j++){
 			$array[$i][$j] = $values_for_array[$j + $i * $cols];
 			$table .= "<td>" . $array[$i][$j] . "</td>";
+			$cols_summ[$j] += $array[$i][$j];
 		}
+		$table .= "<td><b>" . array_sum($array[$i]) . "</b></td>";
 		$table .= "</tr>";
 	}
+	
+	$table .= "<tr>";
+	foreach ($cols_summ as $summ){
+		$table .= "<td><b>" . $summ . "</b></td>";
+	}
+	$table .= "</tr>";
 ?>
 <!DOCTYPE html>
 <html lang='ru'>
